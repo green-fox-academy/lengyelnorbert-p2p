@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ChatController {
@@ -43,4 +44,11 @@ public class ChatController {
   public String register(Model model){
     return "register";
   }
+
+  @RequestMapping(value = "/userregister", method = RequestMethod.GET)
+  public String userRegister(@RequestParam(value = "username") String userName) {
+    System.out.println(userName);
+    return "redirect:/";
+  }
+
 }
