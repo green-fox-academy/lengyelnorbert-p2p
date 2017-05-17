@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ChatController {
 
+  @Autowired
+  LogMessageService logMessageService;
+
   @ExceptionHandler(MissingServletRequestParameterException.class)
   public String handleMissingInput(MissingServletRequestParameterException e) {
     return "Error: " + e.getParameterName();
@@ -26,16 +29,13 @@ public class ChatController {
     return "Error: " + e.getMessage();
   }
 
-  @Autowired
-  LogMessageService logMessageService;
-
   @ModelAttribute
-  private void loginfo(HttpServletRequest httpServletRequest){
+  private void loginfo(HttpServletRequest httpServletRequest) {
     logMessageService.getinfo(httpServletRequest);
   }
 
   @RequestMapping(value = {"/"}, method = RequestMethod.GET)
   public String index(Model model) {
-        return "index";
+    return "index";
   }
 }
