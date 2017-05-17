@@ -54,6 +54,7 @@ public class LogMessageService {
     printLogMessage();
   }
 
+  // REDO TODO this one - still not working
   private void printLogMessage() {
     if (System.getenv("CHAT_APP_LOGLEVEL") != null) {
       if (System.getenv("CHAT_APP_LOGLEVEL").equals("INFO")) {
