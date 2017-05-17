@@ -3,6 +3,7 @@ package com.example.chatapp.controller;
 
 import com.example.chatapp.model.LogMessage;
 import com.example.chatapp.service.LogMessageService;
+import com.example.chatapp.service.UserRepository;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class ChatController {
 
   @Autowired
   LogMessageService logMessageService;
+
+  @Autowired
+  UserRepository userRepository;
 
   @ExceptionHandler(MissingServletRequestParameterException.class)
   public String handleMissingInput(MissingServletRequestParameterException e) {
