@@ -2,6 +2,7 @@ package com.example.chatapp.controller;
 
 
 import com.example.chatapp.model.LogMessage;
+import com.example.chatapp.model.User;
 import com.example.chatapp.service.LogMessageService;
 import com.example.chatapp.service.UserRepository;
 import javax.servlet.http.HttpServletRequest;
@@ -51,6 +52,7 @@ public class ChatController {
 
   @RequestMapping(value = "/userregister", method = RequestMethod.GET)
   public String userRegister(@RequestParam(value = "username") String userName) {
+    userRepository.save(new User(userName));
     System.out.println(userName);
     return "redirect:/";
   }
