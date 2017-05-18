@@ -68,4 +68,8 @@ public class UserService {
     FrontEndMessages.setFrontEndMessageToShow("No active user, nothing to update, please register");
     return "redirect:/register";
   }
+
+  public int getUserTableSize(){
+    return userRepository.findAll().size();
+  }
 }
