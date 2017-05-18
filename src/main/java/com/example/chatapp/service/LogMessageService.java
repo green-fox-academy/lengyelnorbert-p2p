@@ -46,12 +46,6 @@ public class LogMessageService {
 
   public void getinfo(HttpServletRequest httpServletRequest) {
     createLogMessage(httpServletRequest);
-    String infoString =
-            logMessage.getDateAndTime() + " " + logMessage.getLogLevel() + " Request "
-                    + logMessage
-                    .getPath() + " " + logMessage.getMehtod() + " " + logMessage
-                    .getRequestData();
-    System.out.println(infoString);
     printLogMessage();
   }
 

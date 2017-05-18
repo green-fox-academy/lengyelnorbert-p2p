@@ -1,21 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <title>Peer to Peer Chat App</title>
   <!--<link rel="stylesheet" href="style.css" type="text/css" />-->
 </head>
-<body>
-<h1>Peer to Peer Chat Program</h1>
-<main>
-  <table>
-    <form action="/userupdate">
-      <tr>
-        <td>Your Username<input type="list" name="usernameupdate"/></td>
-        <td><input type="submit" value="Update"/></td>
-      </tr>
-    </form>
-  </table>
-</main>
-</body>
+  <body>
+  <h1>Peer to Peer Chat Program</h1>
+    <main>
+      <p th:text="${frontendinfomessage}"></p>
+      <p th:text="'Welcome, active user ' + ${activeuser} + '!'"></p>
+      <table>
+        <form action="/userupdate">
+          <tr>
+            <td>Your Username<input type="text" name="usernameupdate"/></td>
+            <td><input type="submit" value="Update"/></td>
+          </tr>
+        </form>
+      </table>
+      <p></p>>
+      <table>
+        <form action="/message">
+          <tr>
+            <textarea name="messageinput" rows="10" cols="30">Enter your message here</textarea>
+            <td><input type="submit" value="Send"/></td>
+          </tr>
+        </form>
+      </table>
+    </main>
+  </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
   <title>Register | Peer to Peer Chat App</title>
@@ -9,10 +9,11 @@
 <h1>Peer to Peer Chat Program</h1>
 <h2>Register</h2>
 <main>
+  <p th:text="${frontendinfomessage}"> </p>
   <table>
     <form action="/userregister">
       <tr>
-        <td>Username<input type="list" name="username"/></td>
+        <td>Username<input type="text" name="username"/></td>
         <td><input type="submit" value="Register"/></td>
       </tr>
     </form>
