@@ -54,7 +54,7 @@ public class ChatController {
   public String userRegister(@RequestParam(value = "username") String userName) {
     userRepository.save(new User(userName));
     System.out.println(userName);
-    return "redirect:/";
+    return "redirect:";
   }
 
 }
