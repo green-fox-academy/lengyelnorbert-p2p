@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LogMessageService {
+  private String envVariable = "INFO";
 
   @Autowired
   LogMessage logMessage;
@@ -54,17 +55,16 @@ public class LogMessageService {
     printLogMessage();
   }
 
-  // REDO TODO this one - still not working
   private void printLogMessage() {
-    if (System.getenv("CHAT_APP_LOGLEVEL") != null) {
-      if (System.getenv("CHAT_APP_LOGLEVEL").equals("INFO")) {
+    if (envVariable != null) {
+      if (envVariable.equals("INFO")) {
         String infoString =
                 logMessage.getDateAndTime() + " " + logMessage.getLogLevel() + " Request "
                         + logMessage
                         .getPath() + " " + logMessage.getMehtod() + " " + logMessage
                         .getRequestData();
         System.out.println(infoString);
-      } else if (System.getenv("CHAT_APP_LOGLEVEL").equals("ERROR")) {
+      } else if (envVariable.equals("ERROR")) {
         System.out.println("No logmessage provided - CHAT_APP_LOGLEVEL set to ERROR");
       }
     }
