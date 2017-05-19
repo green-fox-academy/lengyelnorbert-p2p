@@ -16,11 +16,15 @@ public class ChatMessageService {
   @Autowired
   UserService userService;
 
+  @Autowired
+  TransferMessageService transferMessageService;
+
   public void addNewChatMessage(String message){
     ChatMessage chatMessage = new ChatMessage();
     chatMessage.setusername(userService.getActiveUser().getUserName());
     chatMessage.setText(message);
     chatMessageRepository.save(chatMessage);
+    transferMessageService.transferOwnMessage(chatMessage);
   }
 
   public void addNewReceivedMessage(TransferMessage transferMessage){
@@ -30,6 +34,7 @@ public class ChatMessageService {
     chatMessage.setText(transferMessage.getMessage().getText());
     chatMessage.setTimestamp(transferMessage.getMessage().getTimestamp());
     chatMessageRepository.save(chatMessage);
+    transferMessageService.transferOtherMessage(transferMessage);
   }
 
   public List<ChatMessage> getAllChatMessage(){

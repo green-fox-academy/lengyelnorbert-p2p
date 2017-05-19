@@ -8,6 +8,7 @@ import com.example.chatapp.service.ChatMessageService;
 import com.example.chatapp.service.ResponseService;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ public class ChatRestController {
     httpServletResponse.sendRedirect("/");
   }
 
+  @CrossOrigin("*")
   @RequestMapping(value = "/api/message/receive", method = RequestMethod.POST)
   public ResponseObject receiveMessage(@RequestBody TransferMessage transferMessage) {
     chatMessageService.addNewReceivedMessage(transferMessage);

@@ -1,6 +1,9 @@
 package com.example.chatapp.model;
 
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Client {
 
   private String id;
