@@ -22,21 +22,4 @@ public class ChatRestController {
     chatMessageService.addNewChatMessage(messageinput);
     httpServletResponse.sendRedirect("/");
   }
-
-//  @Autowired
-//  UserService userService;
-//
-//  @RequestMapping(value = "/userregister", method = RequestMethod.GET)
-//  public void userRegister(HttpServletResponse httpServletResponse,
-//          @RequestParam(value = "username") String userName) throws Exception {
-//    String returnString = userService.registerUser(userName);
-//    httpServletResponse.sendRedirect(returnString);
-//  }
-//
-//  @RequestMapping(value = "/userupdate", method = RequestMethod.GET)
-//  public void userUpdate(HttpServletResponse httpServletResponse,
-//          @RequestParam(value = "usernameupdate") String userName) throws Exception {
-//    String returnString = userService.updateUser(userName);
-//    httpServletResponse.sendRedirect(returnString);
-//  }
 }

@@ -25,6 +25,9 @@ public class ChatController {
   @Autowired
   UserService userService;
 
+  @Autowired
+  ChatMessageService chatMessageService;
+
   @ExceptionHandler(MissingServletRequestParameterException.class)
   public String handleMissingInput(MissingServletRequestParameterException e) {
     return "Error: " + e.getParameterName();
@@ -42,19 +45,21 @@ public class ChatController {
 
   @RequestMapping(value = {"/"}, method = RequestMethod.GET)
   public String index(Model model) {
-    if (userService.getUserTableSize() == 0){
+    if (userService.getUserTableSize() == 0) {
       return "redirect:/register";
     }
     model.addAttribute("frontendinfomessage", FrontEndMessages.getFrontEndMessageToShow());
     model.addAttribute("activeuser", userService.getActiveUser().getUserName());
+    model.addAttribute("messagelist", chatMessageService.getAllChatMessage());
     return "index";
   }
 
   @RequestMapping(value = {"/register"}, method = RequestMethod.GET)
-  public String register(Model model){
+  public String register(Model model) {
     model.addAttribute("frontendinfomessage", FrontEndMessages.getFrontEndMessageToShow());
     return "register";
   }
+
   @RequestMapping(value = "/userregister", method = RequestMethod.GET)
   public String userRegister(@RequestParam(value = "username") String userName) {
     return userService.registerUser(userName);

@@ -22,7 +22,7 @@ public class ChatMessageService {
     chatMessageRepository.save(chatMessage);
   }
 
-  public Iterable<ChatMessage> getAllChatMessage(){
+  public List<ChatMessage> getAllChatMessage(){
     return chatMessageRepository.findAll();
   }
 }
