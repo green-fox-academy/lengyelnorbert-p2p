@@ -1,5 +1,6 @@
 package com.example.chatapp.model;
 
+import com.example.chatapp.service.ChatMessageService;
 import java.util.Random;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -31,6 +32,7 @@ public class ChatMessage {
   public void setId(int id) {
     this.id = id;
   }
+
   public void setTimestamp(String timestamp) {
     this.timestamp = timestamp;
   }
@@ -53,6 +55,11 @@ public class ChatMessage {
 
   private int calculateRandomID() {
     Random r = new Random();
-    return r.nextInt(9999999 - 1000000) + 1000000;
+    int random = r.nextInt(9999999 - 1000000) + 1000000;
+    ChatMessageService chatMessageService = new ChatMessageService();
+    if (chatMessageService.checkChatMessageID(random)) {
+      calculateRandomID();
+    }
+    return random;
   }
 }

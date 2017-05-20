@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface ChatMessageRepository extends CrudRepository<ChatMessage, Long> {
 
+  @Override
   List<ChatMessage> findAll();
-
 }

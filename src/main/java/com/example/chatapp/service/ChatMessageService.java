@@ -4,6 +4,7 @@ package com.example.chatapp.service;
 import com.example.chatapp.model.ChatMessage;
 import com.example.chatapp.model.TransferMessage;
 import java.util.List;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class ChatMessageService {
   @Autowired
   TransferMessageService transferMessageService;
 
-  public void addNewChatMessage(String message){
+  public void addNewChatMessage(String message) {
     ChatMessage chatMessage = new ChatMessage();
     chatMessage.setusername(userService.getActiveUser().getUserName());
     chatMessage.setText(message);
@@ -27,7 +28,7 @@ public class ChatMessageService {
     transferMessageService.transferOwnMessage(chatMessage);
   }
 
-  public void addNewReceivedMessage(TransferMessage transferMessage){
+  public void addNewReceivedMessage(TransferMessage transferMessage) {
     ChatMessage chatMessage = new ChatMessage();
     chatMessage.setId(transferMessage.getMessage().getId());
     chatMessage.setusername(transferMessage.getMessage().getusername());
@@ -37,7 +38,12 @@ public class ChatMessageService {
     transferMessageService.transferOtherMessage(transferMessage);
   }
 
-  public List<ChatMessage> getAllChatMessage(){
+  public boolean checkChatMessageID(int randomNumberToValidate) {
+    return (chatMessageRepository.exists(Long.valueOf(randomNumberToValidate)));
+  }
+
+  public List<ChatMessage> getAllChatMessage() {
     return chatMessageRepository.findAll();
   }
 }
+
