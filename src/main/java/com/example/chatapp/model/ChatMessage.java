@@ -53,13 +53,9 @@ public class ChatMessage {
     return timestamp;
   }
 
-  private int calculateRandomID() {
+  public int calculateRandomID() {
     Random r = new Random();
     int random = r.nextInt(9999999 - 1000000) + 1000000;
-    ChatMessageService chatMessageService = new ChatMessageService();
-    if (chatMessageService.checkChatMessageID(random)) {
-      calculateRandomID();
-    }
     return random;
   }
 }

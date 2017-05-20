@@ -24,6 +24,9 @@ public class ChatMessageService {
     ChatMessage chatMessage = new ChatMessage();
     chatMessage.setusername(userService.getActiveUser().getUserName());
     chatMessage.setText(message);
+    while (checkChatMessageID(chatMessage.getId())){
+      chatMessage.setId(chatMessage.calculateRandomID());
+    }
     chatMessageRepository.save(chatMessage);
     transferMessageService.transferOwnMessage(chatMessage);
   }
@@ -38,8 +41,8 @@ public class ChatMessageService {
     transferMessageService.transferOtherMessage(transferMessage);
   }
 
-  public boolean checkChatMessageID(int randomNumberToValidate) {
-    return (chatMessageRepository.exists(Long.valueOf(randomNumberToValidate)));
+  public boolean checkChatMessageID(int messageIDToValidate) {
+    return (chatMessageRepository.exists(Long.valueOf(messageIDToValidate)));
   }
 
   public List<ChatMessage> getAllChatMessage() {
