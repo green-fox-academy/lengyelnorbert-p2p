@@ -41,8 +41,8 @@ public class ChatMessageService {
     transferMessageService.transferOtherMessage(transferMessage);
   }
 
-  public boolean checkChatMessageID(int messageIDToValidate) {
-    return (chatMessageRepository.exists(Long.valueOf(messageIDToValidate)));
+  public boolean checkChatMessageID(long messageIDToValidate) {
+    return (chatMessageRepository.exists(messageIDToValidate));
   }
 
   public List<ChatMessage> getAllChatMessage() {

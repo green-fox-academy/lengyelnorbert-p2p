@@ -1,5 +1,6 @@
 package com.example.chatapp.service;
 
+import com.example.chatapp.model.ApplicationSettings;
 import com.example.chatapp.model.ChatMessage;
 import com.example.chatapp.model.Client;
 import com.example.chatapp.model.ResponseOK;
@@ -12,8 +13,6 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class TransferMessageService {
-
-  private String messageForwardTo = "https://dorinagychatapp.herokuapp.com/api/message/receive";
 
   @Autowired
   TransferMessage transferMessage;
@@ -45,6 +44,6 @@ public class TransferMessageService {
 
   public void broadcast(TransferMessage transferMessage) {
     ResponseOK responseObject = restTemplate
-            .postForObject(messageForwardTo, transferMessage, ResponseOK.class);
+            .postForObject(ApplicationSettings.getChatAppPeerAddresss(), transferMessage, ResponseOK.class);
   }
 }

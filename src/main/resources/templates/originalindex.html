@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Peer to Peer Chat App</title>
+  <!--<meta http-equiv="refresh" content="5"/>-->
+  <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Peer to Peer Chat Program</h1>
+<main>
+  <p th:text="'Active user ' + ${activeuser} + '! ' + ${frontendinfomessage}"></p>
+  <table>
+    <form action="/userupdate">
+      <tr>
+        <td>Your Username<input type="text" name="usernameupdate"/></td>
+        <td><input class="btn btn-primary" type="submit" value="Update"/></td>
+      </tr>
+    </form>
+  </table>
+  <table>
+    <ul>
+      <li>App</li>
+      <p>Hi there! Submit your message using the send button!</p>
+    </ul>
+    <ul th:each="message : ${messagelist}">
+      <li th:text="${message.getusername()}">username</li>
+      <p th:text="${message.getText()}">text</p>
+    </ul>
+  </table>
+  <table>
+    <form action="/sendmessage" method="post">
+      <tr>
+        <td><textarea name="messageinput" rows="10" cols="30">Enter your message here</textarea></td>
+        <td><input class="btn btn-primary" type="submit" value="Send"/></td>
+      </tr>
+    </form>
+  </table>
+  <a class="btn btn-success" th:href="@{'/'}">Refresh</a>
+</main>
+<script src="webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</body>
+</html>

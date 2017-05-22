@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class ChatMessage {
 
   @Id
-  private int id = calculateRandomID();
+  private long id = calculateRandomID();
   private String username;
   private String text;
   private String timestamp = String.valueOf(System.currentTimeMillis());
@@ -29,7 +29,7 @@ public class ChatMessage {
     this.text = text;
   }
 
-  public void setId(int id) {
+  public void setId(long id) {
     this.id = id;
   }
 
@@ -37,7 +37,7 @@ public class ChatMessage {
     this.timestamp = timestamp;
   }
 
-  public int getId() {
+  public long getId() {
     return id;
   }
 
@@ -53,9 +53,9 @@ public class ChatMessage {
     return timestamp;
   }
 
-  public int calculateRandomID() {
+  public long calculateRandomID() {
     Random r = new Random();
     int random = r.nextInt(9999999 - 1000000) + 1000000;
-    return random;
+    return Long.valueOf(random);
   }
 }
