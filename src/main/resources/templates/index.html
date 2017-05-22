@@ -6,39 +6,47 @@
   <!--<meta http-equiv="refresh" content="5"/>-->
   <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
-  <body>
+<body>
+<div class="container-fluid">
   <h1>Peer to Peer Chat Program</h1>
-    <main>
-      <p th:text="'Active user ' + ${activeuser} + '! ' + ${frontendinfomessage}"></p>
+  <main>
+    <div class="row">
+      <div class="col-md-3">
+      <p th:text="${frontendinfomessage}"></p>
       <table>
         <form action="/userupdate">
           <tr>
-            <td>Your Username<input type="text" name="usernameupdate"/></td>
-            <td><input class="btn btn-primary" type="submit" value="Update"/></td>
+            <td>Your Username<input th:value="${activeuser}" type="text" name="usernameupdate"/>
+            <input class="btn btn-primary" type="submit" value="Update Username"/></td>
           </tr>
         </form>
       </table>
+        <table>
+          <form action="/sendmessage" method="post">
+            <tr>
+              <td><textarea name="messageinput" rows="10" cols="30">Enter your message here</textarea>
+              <input class="btn btn-primary" type="submit" value="Send Message"/></td>
+            </tr>
+          </form>
+        </table>
+      </div>
       <table>
-      <ul>
-        <li>App</li>
-        <p>Hi there! Submit your message using the send button!</p>
-      </ul>
-      <ul th:each="message : ${messagelist}">
-        <li class="bg-primary" th:text="${message.getusername()}">username</li>
-        <p th:text="${message.getText()}">text</p>
-      </ul>
+        <div class="col-md-3">
+          <a class="btn btn-success" th:href="@{'/'}">Refresh Messages</a>
+        <ul>
+          <li>App</li>
+          <p>Hi there! Submit your message using the send button!</p>
+        </ul>
+        <ul th:each="message : ${messagelist}">
+          <li class="bg-primary" th:text="${message.getusername()}">username</li>
+          <p th:text="${message.getText()}">text</p>
+        </ul>
+        </div>
       </table>
-      <table>
-        <form action="/sendmessage" method="post">
-          <tr>
-            <td><textarea name="messageinput" rows="10" cols="30">Enter your message here</textarea></td>
-            <td><input class="btn btn-primary" type="submit" value="Send"/></td>
-          </tr>
-        </form>
-      </table>
-      <a class="btn btn-success" th:href="@{'/'}">Refresh</a>
-    </main>
-  <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
-  <script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
-  </body>
+    </div>
+  </main>
+</div>
+<script src="webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</body>
 </html>

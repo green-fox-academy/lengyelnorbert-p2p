@@ -38,7 +38,7 @@ public class ChatMessageService {
     chatMessage.setText(transferMessage.getMessage().getText());
     chatMessage.setTimestamp(transferMessage.getMessage().getTimestamp());
     chatMessageRepository.save(chatMessage);
-    transferMessageService.transferOtherMessage(transferMessage);
+//    transferMessageService.transferOtherMessage(transferMessage);
   }
 
   public boolean checkChatMessageID(long messageIDToValidate) {

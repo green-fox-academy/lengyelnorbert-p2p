@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResponseService {
 
-  public ResponseObject statusOK(){
+  public ResponseOK statusOK(){
     return new ResponseOK();
   }
 }

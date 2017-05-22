@@ -2,6 +2,7 @@ package com.example.chatapp.controller;
 
 import com.example.chatapp.model.ChatMessage;
 import com.example.chatapp.model.Client;
+import com.example.chatapp.model.ResponseOK;
 import com.example.chatapp.model.ResponseObject;
 import com.example.chatapp.model.TransferMessage;
 import com.example.chatapp.service.ChatMessageService;
@@ -33,7 +34,7 @@ public class ChatRestController {
 
   @CrossOrigin("*")
   @RequestMapping(value = "/api/message/receive", method = RequestMethod.POST)
-  public ResponseObject receiveMessage(@RequestBody TransferMessage transferMessage) {
+  public ResponseOK receiveMessage(@RequestBody TransferMessage transferMessage) {
     chatMessageService.addNewReceivedMessage(transferMessage);
     return responseService.statusOK();
   }
