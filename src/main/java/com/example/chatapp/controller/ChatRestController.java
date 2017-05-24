@@ -5,6 +5,7 @@ import com.example.chatapp.model.Client;
 import com.example.chatapp.model.ResponseOK;
 import com.example.chatapp.model.ResponseObject;
 import com.example.chatapp.model.TransferMessage;
+import com.example.chatapp.model.UniqueUser;
 import com.example.chatapp.service.ChatMessageService;
 import com.example.chatapp.service.ResponseService;
 import javax.servlet.http.HttpServletResponse;
@@ -37,5 +38,11 @@ public class ChatRestController {
   public ResponseOK receiveMessage(@RequestBody TransferMessage transferMessage) {
     chatMessageService.addNewReceivedMessage(transferMessage);
     return responseService.statusOK();
+  }
+
+  @RequestMapping(value = "/listuniqueusermessage", method = RequestMethod.POST)
+  public String uniqueUserMessage(UniqueUser uniqueuser){
+    chatMessageService.setUniqueUser(uniqueuser);
+    return "redirect:/";
   }
 }

@@ -10,4 +10,8 @@ import org.springframework.stereotype.Component;
 public interface ChatMessageRepository extends CrudRepository<ChatMessage, Long> {
 
   List<ChatMessage> findAll();
+
+  List<ChatMessage> findTop20ByOrderByTimestampDesc();
+
+//  List<ChatMessage> findAllByUsernameByOrderByTimestampDesc(String username);
 }

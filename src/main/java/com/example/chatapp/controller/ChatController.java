@@ -51,6 +51,9 @@ public class ChatController {
     model.addAttribute("frontendinfomessage", FrontEndMessages.getFrontEndMessageToShow());
     model.addAttribute("activeuser", userService.getActiveUser().getUserName());
     model.addAttribute("messagelist", chatMessageService.getAllChatMessage());
+    model.addAttribute("latesttwentydesc", chatMessageService.getLatestTwentyMessageDesc());
+    model.addAttribute("uniqueuserlist", chatMessageService.getUniqueUserList());
+    model.addAttribute("messagesbyuniqueuser", chatMessageService.getMessagesByUniqueUser());
     return "index";
   }
 

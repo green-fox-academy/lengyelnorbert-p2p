@@ -58,4 +58,14 @@ public class ChatMessage {
     int random = r.nextInt(9999999 - 1000000) + 1000000;
     return Long.valueOf(random);
   }
+
+  @Override
+  public String toString() {
+    return "ChatMessage{" +
+            "id=" + id +
+            ", username='" + username + '\'' +
+            ", text='" + text + '\'' +
+            ", timestamp='" + timestamp + '\'' +
+            '}';
+  }
 }
