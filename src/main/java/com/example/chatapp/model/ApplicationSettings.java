@@ -3,7 +3,7 @@ package com.example.chatapp.model;
 
 public class ApplicationSettings {
 
-  private static String CHAT_APP_PEER_ADDRESSS = "https://limitless-journey-84827.herokuapp.com/api/message/receive";
+  private static String CHAT_APP_PEER_ADDRESSS = "https://tirikk-p2pchat-1.herokuapp.com/api/message/receive";
   private static String CHAT_APP_UNIQUE_ID = "https://lengyelnorbert.herokuapp.com/";
 
   public static String getChatAppPeerAddresss() {
