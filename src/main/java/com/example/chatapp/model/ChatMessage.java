@@ -16,7 +16,7 @@ public class ChatMessage {
   private long id = calculateRandomID();
   private String username;
   private String text;
-  private String timestamp = String.valueOf(System.currentTimeMillis());
+  private String timestamp;
 
   public ChatMessage() {
   }
@@ -35,6 +35,10 @@ public class ChatMessage {
 
   public void setTimestamp(String timestamp) {
     this.timestamp = timestamp;
+  }
+
+  public void setTimestampForNow(){
+    timestamp = String.valueOf(System.currentTimeMillis());
   }
 
   public long getId() {

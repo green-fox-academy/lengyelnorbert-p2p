@@ -1,17 +1,15 @@
 package com.example.chatapp.controller;
 
-import com.example.chatapp.model.ChatMessage;
-import com.example.chatapp.model.Client;
-import com.example.chatapp.model.ResponseOK;
-import com.example.chatapp.model.ResponseObject;
+
+import com.example.chatapp.model.ResponseMessage;
 import com.example.chatapp.model.TransferMessage;
 import com.example.chatapp.model.UniqueUser;
 import com.example.chatapp.service.ChatMessageService;
 import com.example.chatapp.service.ResponseService;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,14 +33,20 @@ public class ChatRestController {
 
   @CrossOrigin("*")
   @RequestMapping(value = "/api/message/receive", method = RequestMethod.POST)
-  public ResponseOK receiveMessage(@RequestBody TransferMessage transferMessage) {
+  public ResponseMessage receiveMessage(@RequestBody TransferMessage transferMessage) {
+    String errorString = chatMessageService.checkReceivedMessageIfValid(transferMessage);
+    if (!errorString.equals("Missing field(s):")) {
+      return responseService.statusError(errorString);
+    }
     chatMessageService.addNewReceivedMessage(transferMessage);
     return responseService.statusOK();
   }
 
   @RequestMapping(value = "/listuniqueusermessage", method = RequestMethod.POST)
-  public String uniqueUserMessage(UniqueUser uniqueuser){
-    chatMessageService.setUniqueUser(uniqueuser);
-    return "redirect:/";
+  public void uniqueUserMessage(HttpServletResponse httpServletResponse, UniqueUser uniqueuser)
+          throws Exception {
+    System.out.println(uniqueuser.getUniqueUserName());
+    chatMessageService.setUniqueUserName(uniqueuser.getUniqueUserName());
+    httpServletResponse.sendRedirect("/");
   }
 }

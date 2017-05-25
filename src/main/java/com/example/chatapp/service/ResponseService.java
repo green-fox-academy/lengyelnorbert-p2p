@@ -1,14 +1,22 @@
 package com.example.chatapp.service;
 
 
-import com.example.chatapp.model.ResponseOK;
-import com.example.chatapp.model.ResponseObject;
+import com.example.chatapp.model.ResponseMessage;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ResponseService {
 
-  public ResponseOK statusOK(){
-    return new ResponseOK();
+  public ResponseMessage statusOK(){
+    ResponseMessage responseMessage = new ResponseMessage();
+    responseMessage.setStatus("ok");
+    return responseMessage;
+  }
+
+  public ResponseMessage statusError(String errorMessage){
+    ResponseMessage responseMessage = new ResponseMessage();
+    responseMessage.setStatus("error");
+    responseMessage.setMessage(errorMessage);
+    return responseMessage;
   }
 }

@@ -3,10 +3,8 @@ package com.example.chatapp.service;
 import com.example.chatapp.model.ApplicationSettings;
 import com.example.chatapp.model.ChatMessage;
 import com.example.chatapp.model.Client;
-import com.example.chatapp.model.ResponseOK;
-import com.example.chatapp.model.ResponseObject;
+import com.example.chatapp.model.ResponseMessage;
 import com.example.chatapp.model.TransferMessage;
-import com.example.chatapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -43,7 +41,17 @@ public class TransferMessageService {
   }
 
   public void broadcast(TransferMessage transferMessage) {
-    ResponseOK responseObject = restTemplate
-            .postForObject(ApplicationSettings.getChatAppPeerAddresss(), transferMessage, ResponseOK.class);
+    ResponseMessage responseObject = restTemplate
+            .postForObject(ApplicationSettings.getChatAppPeerAddresss(), transferMessage, ResponseMessage.class);
+  }
+
+  @Override
+  public String toString() {
+    return "TransferMessageService{" +
+            "transferMessage=" + transferMessage +
+            ", userService=" + userService +
+            ", client=" + client +
+            ", restTemplate=" + restTemplate +
+            '}';
   }
 }

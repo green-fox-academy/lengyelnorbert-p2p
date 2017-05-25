@@ -27,4 +27,12 @@ public class TransferMessage {
   public void setClient(Client client) {
     this.client = client;
   }
+
+  @Override
+  public String toString() {
+    return "TransferMessage{" +
+            "message=" + message +
+            ", client=" + client +
+            '}';
+  }
 }

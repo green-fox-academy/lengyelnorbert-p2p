@@ -4,7 +4,6 @@ package com.example.chatapp.service;
 import com.example.chatapp.model.ChatMessage;
 import com.example.chatapp.model.TransferMessage;
 import com.example.chatapp.model.UniqueUser;
-import com.example.chatapp.model.User;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,12 +11,15 @@ import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 @Component
 public class ChatMessageService {
 
   List<UniqueUser> uniqueUserList;
   List<ChatMessage> messagesByUniqueUser;
+
+  @Autowired
   UniqueUser uniqueUser;
 
   @Autowired
@@ -29,18 +31,15 @@ public class ChatMessageService {
   @Autowired
   TransferMessageService transferMessageService;
 
-  public UniqueUser getUniqueUser() {
-    return uniqueUser;
-  }
-
-  public void setUniqueUser(UniqueUser uniqueUser) {
-    this.uniqueUser = uniqueUser;
+  public void setUniqueUserName(String uniqueUserNameToSet) {
+    uniqueUser.setUniqueUserName(uniqueUserNameToSet);
   }
 
   public void addNewChatMessage(String message) {
     ChatMessage chatMessage = new ChatMessage();
     chatMessage.setusername(userService.getActiveUser().getUserName());
     chatMessage.setText(message);
+    chatMessage.setTimestampForNow();
     while (checkChatMessageID(chatMessage.getId())) {
       chatMessage.setId(chatMessage.calculateRandomID());
     }
@@ -115,14 +114,35 @@ public class ChatMessageService {
 
   public List<ChatMessage> getMessagesByUniqueUser() {
     messagesByUniqueUser = new ArrayList<>();
-    if (!(uniqueUser == null)) {
+//    if (!(uniqueUser.getUniqueUserName() == null)) {
       for (ChatMessage chatmessage : chatMessageRepository.findAll()) {
-        if (uniqueUser.getUniqueUserName().toLowerCase()
-                .equals(chatmessage.getusername().toLowerCase())) {
+//        if (uniqueUser.getUniqueUserName().toLowerCase()
+//                .equals(chatmessage.getusername().toLowerCase())) {
           messagesByUniqueUser.add(chatmessage);
-        }
+//        }
       }
-    }
+//    }
     return messagesByUniqueUser;
   }
+
+  public String checkReceivedMessageIfValid(TransferMessage transferMessage) {
+    String errorString = "Missing field(s):";
+    if (StringUtils.isEmpty(transferMessage.getMessage().getId())) {
+      errorString += " message ID, ";
+    }
+    if (StringUtils.isEmpty(transferMessage.getMessage().getusername())) {
+      errorString += " message username, ";
+    }
+    if (StringUtils.isEmpty(transferMessage.getMessage().getText())) {
+      errorString += " message text, ";
+    }
+    if (StringUtils.isEmpty(transferMessage.getMessage().getTimestamp())) {
+      errorString += " message timestamp, ";
+    }
+    if (StringUtils.isEmpty(transferMessage.getClient().getId())) {
+      errorString += " client ID, ";
+    }
+    return errorString;
+  }
 }
+
